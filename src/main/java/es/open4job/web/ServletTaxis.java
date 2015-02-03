@@ -33,6 +33,7 @@ public class ServletTaxis extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//Controlador
 		int id=0;
 		String idInt = (String)request.getParameter("id");
@@ -45,13 +46,17 @@ public class ServletTaxis extends HttpServlet {
 			Connection conexion = bbdd.abrirConexion();
 			EstacionServicioDAO estacionServicioDAO = new EstacionServicioDAO();
 			EstacionServicioVO estacionServicioVO = estacionServicioDAO.getEstacionServicio(id, conexion);
+			
 			//Vista
 			PrintWriter out = response.getWriter();
-			out.println("<html>");
+			request.setAttribute("Estacionamiento",estacionServicioVO);
+			request.getRequestDispatcher("Estacionamientoid.jsp").forward(request,response);
+			
+			/*out.println("<html>");
 			out.println("<body>");
 			out.println("<h1>"+estacionServicioVO.toString()+"</h1>");
 			out.println("</body>");
-			out.println("</html>");
+			out.println("</html>");*/
 			
 			
 		} catch (ClassNotFoundException e) {
