@@ -1,5 +1,7 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<form action="./ServletTaxis">
+<input type="text" name="id"/>
+</form>
 </body>
 </html>
