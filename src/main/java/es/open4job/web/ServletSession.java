@@ -1,3 +1,4 @@
+package es.open4job.web;
 
 
 import java.io.IOException;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import es.open4job.model.dao.BaseDatosDAO;
 import es.open4job.model.dao.EstacionServicioDAO;
 import es.open4job.model.vo.EstacionServicioVO;
-import es.open4job.web.ServletTaxis;
 
 
 public class ServletSession extends HttpServlet {
@@ -38,13 +38,13 @@ public class ServletSession extends HttpServlet {
 		String idInt = (String)session.getAttribute("id");
 		id = Integer.parseInt(idInt);
 		
-		BaseDatosDAO bbdd = new BaseDatosDAO();
+		//BaseDatosDAO bbdd = new BaseDatosDAO();
 		
 		try {
 			
-			Connection conexion = bbdd.abrirConexion();
+			//Connection conexion = bbdd.abrirConexion();
 			EstacionServicioDAO estacionServicioDAO = new EstacionServicioDAO();
-			EstacionServicioVO estacionServicioVO = estacionServicioDAO.getEstacionServicio(id, conexion);
+			EstacionServicioVO estacionServicioVO = estacionServicioDAO.getEstacionServicio(id);
 			
 			request.setAttribute("estacionServicioVO", estacionServicioVO);
 			
@@ -56,9 +56,12 @@ public class ServletSession extends HttpServlet {
 					"ClassNotFoundException : " + e.getMessage());
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "SQLException : " + e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		bbdd.cerrarConexion();
+		//bbdd.cerrarConexion();
 	
 	}
 	
