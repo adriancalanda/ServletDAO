@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>es.open4job.web.ServletTaxis</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ServletSession</servlet-name>
+  	<display-name>ServletSession</display-name>
+  	<description></description>
+  	<servlet-class>ServletSession</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>ServletTaxis</servlet-name>
   	<url-pattern>/ServletTaxis</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ServletSession</servlet-name>
+  	<url-pattern>/ServletSession</url-pattern>
   </servlet-mapping>
 </web-app>

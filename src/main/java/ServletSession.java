@@ -1,11 +1,8 @@
-package es.open4job.web;
+
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,37 +12,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.open4job.model.dao.BaseDatosDAO;
 import es.open4job.model.dao.EstacionServicioDAO;
 import es.open4job.model.vo.EstacionServicioVO;
-import es.open4job.model.dao.BaseDatosDAO;
+import es.open4job.web.ServletTaxis;
 
 
-
-public class ServletTaxis extends HttpServlet {
+public class ServletSession extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final Logger logger = Logger.getLogger(ServletTaxis.class
 			.getName());
        
-   
-    public ServletTaxis() {
+    
+    public ServletSession() {
         super();
-       
+        
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Controlador
-		//int id=0;
+		int id=0;
 		HttpSession session = request.getSession(true);
-		String idInt = (String)request.getParameter("id");
-		//id = Integer.parseInt(idInt);
-		//Modelo
-		//Realización getSession para guardar la sesion.
-		session.setAttribute("id",idInt);
-		request.getRequestDispatcher("Confirmacion.jsp").forward(request, response);
 		
-		/*BaseDatosDAO bbdd = new BaseDatosDAO();
+		String idInt = (String)session.getAttribute("id");
+		id = Integer.parseInt(idInt);
+		
+		BaseDatosDAO bbdd = new BaseDatosDAO();
 		
 		try {
 			
@@ -53,14 +46,10 @@ public class ServletTaxis extends HttpServlet {
 			EstacionServicioDAO estacionServicioDAO = new EstacionServicioDAO();
 			EstacionServicioVO estacionServicioVO = estacionServicioDAO.getEstacionServicio(id, conexion);
 			
+			request.setAttribute("estacionServicioVO", estacionServicioVO);
+			
 			//Vista
-		
-			//Realización de getrequest sin guardar la sesión.
-			
-			request.setAttribute("Estacionamiento",estacionServicioVO);
-			request.getRequestDispatcher("Estacionamientoid.jsp").forward(request,response);
-			
-			
+			request.getRequestDispatcher("EstacionamientoSession.jsp").forward(request, response);
 			
 		} catch (ClassNotFoundException e) {
 			logger.log(Level.SEVERE,
@@ -69,9 +58,14 @@ public class ServletTaxis extends HttpServlet {
 			logger.log(Level.SEVERE, "SQLException : " + e.getMessage());
 		}
 		
-		bbdd.cerrarConexion();*/
+		bbdd.cerrarConexion();
 	
 	}
+	
 
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 
 }
